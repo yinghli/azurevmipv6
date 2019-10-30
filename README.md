@@ -92,7 +92,7 @@ Follow [this](https://docs.microsoft.com/en-us/azure/network-watcher/network-wat
 ```
 
 First two logs are probe message from standard load balancer(SLB). </br>
-169.63.129.16 and [fe80:\:1234\:5678:9abc] are SLB probe packet source IP. </br>
+169.63.129.16 and [fe80:`:1234:`5678:9abc] are SLB probe packet source IP. </br>
 "T" means TCP, "I" is inbound direction. "A" is traffic is allowed. "B" is initial packet. </br>
 
 Third one the customer real IPv6 request.</br>
