@@ -12,9 +12,18 @@ The template creates the following Azure resources:
 - an IPv4 Public IP address for each VM to facilitate remote connection to the VM (RDP)
 - two virtual machines with both IPv4 and IPv6 endpoints in the VNET/subnet
 
-There are two json template, one is for Windows Server 2019, the other is Ubuntu 18.04. </br>
+There are two json template, [one](https://github.com/yinghli/azurevmipv6/blob/master/ipv6.json) is for Windows Server 2019, the [other](https://github.com/yinghli/azurevmipv6/blob/master/ipv6ubuntu.json) is Ubuntu 18.04. </br>
+Go to Azure portal and deploy by template.</br>
+
+## Windows 
 For Windows Server, the VM can boot automatically. Login the system, ipconfig will show the IPv4/IPv6 configuration. </br>
-For Ubuntu Server, system boot up and get below errors:
+- Install IIS and make sure website are working well. 
+-	Turn off windows firewall Or make sure TCP 80 are open for connections.
+-	Open browser on client, type “http://[ipv6 address]” to access the testing website. 
+- Open CMD and “netstat -an” to check connections are all good. 
+
+## Ubuntu
+For Ubuntu Server, system can't boot up and get below errors:
 ```
 [   15.785613] cloud-init[948]: Cloud-init v. 19.2-36-g059d049c-0ubuntu2~18.04.1 running 'init' at Wed, 30 Oct 2019 08:03:54 +0000. Up 15.27 seconds.
 [   15.795612] cloud-init[948]: ci-info: +++++++++++++++++++++++++++Net device info++++++++++++++++++++++++++++
@@ -34,7 +43,7 @@ For Ubuntu Server, system boot up and get below errors:
 [   15.867224] cloud-init[948]: 2019-10-30 08:03:55,404 - azure.py[WARNING]: No lease found; using default endpoint
 ```
 
-Need to login the server console and run dhclient command. 
+Need to login the server serial console from portal and run dhclient command. 
 
 ```
 dhclient -4
