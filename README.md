@@ -40,7 +40,22 @@ Need to login the server console and run dhclient command.
 dhclient -4
 dhclient -6
 ```
-Simple install apache and php for testing. Client can setup HTTP request with IPv6 address.
+Simplely install apache and php for testing. 
+```
+sudo apt-get update 
+sudo apt-get install apache2
+sudo apt-get install php libapache2-mod-php php-mysql
+```
+Create new info.php page to capture HTTP header information for each request.</br>
+```
+vi /var/www/html/info.php
+
+<?php
+// Show all information, defaults to INFO_ALL
+phpinfo();
+?>
+```
+Client can initial HTTP request to standard load balancer IPv6 address. </br>
 Here is "netstat -anW" output. "W" is used to wide output. 
 ```
 root@DsVM1:/var/www/html# netstat -anW
