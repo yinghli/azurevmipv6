@@ -83,19 +83,22 @@ udp        0      0 0.0.0.0:68              0.0.0.0:*
 udp6       0      0 fe80::20d:3aff:fef9:b761:546 :::*
 ```
 
-After enable NSG logging, will get the same flow logging.
+Follow [this](https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-portal) to enable NSG flow log. Download the nsg flow log from storage account, will get the HTTP request log like this:
+
 ```
 "1572419632,168.63.129.16,10.0.0.5,56372,80,T,I,A,B,,,,",
 "1572419632,fe80::1234:5678:9abc,ace:cab:deca:deed::5,56383,80,T,I,A,B,,,,",
 "1572419634,2404:f801:8050:1:80c0::9359,ace:cab:deca:deed::5,30278,80,T,I,A,E,14,1557,13,24562",
 ```
 
-First two log are probe message from standard load balancer(SLB). </br>
-169.63.129.16 and fe80::1234:5678:9abc are SLB probe packet source IP. </br>
+First two logs are probe message from standard load balancer(SLB). </br>
+169.63.129.16 and [fe80::\1234:5678:9abc] are SLB probe packet source IP. </br>
 "T" means TCP, "I" is inbound direction. "A" is traffic is allowed. "B" is initial packet. </br>
 
 Third one the customer real IPv6 request.</br>
-2404:f801:8050:1:80c0::9359 is source IPv6 address. ace:cab:deca:deed::5 is server IPv6 address. </br>
+[2404:f801:8050:1:80c0::9359] is client source IPv6 address. [ace:cab:deca:deed::5] is server IPv6 address. </br>
 30278 is source port, 80 is destination port. </br>
 "T" means TCP, "I" is inbound direction. "A" is traffic is allowed. "E" means connection closed. </br>
 14 packets client sent to server, 1557 bytes. 13 packets server send to client, 2456 bytes. </br>
+
+For more flog log information, check [here](https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview#nsg-flow-logs-version-2)
