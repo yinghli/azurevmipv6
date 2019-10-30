@@ -40,3 +40,29 @@ Need to login the server console and run dhclient command.
 dhclient -4
 dhclient -6
 ```
+Simple install apache and php for testing. Client can setup HTTP request with IPv6 address.
+Here is "netstat -anW" output. "W" is used to wide output. 
+```
+root@DsVM1:/var/www/html# netstat -anW
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address                   State
+tcp        0      0 127.0.0.53:53           0.0.0.0:*                         LISTEN
+tcp        0      0 0.0.0.0:22              0.0.0.0:*                         LISTEN
+tcp        0    256 10.0.0.5:22             167.220.233.144:53644             ESTABLISHED
+tcp6       0      0 :::80                   :::*                              LISTEN
+tcp6       0      0 :::22                   :::*                              LISTEN
+tcp6       0      0 ace:cab:deca:deed::5:80 fe80::1234:5678:9abc:61714        SYN_RECV
+tcp6       0      0 10.0.0.5:80             168.63.129.16:61706               SYN_RECV
+tcp6       0      0 ace:cab:deca:deed::5:80 2404:f801:8050:1:80c0::9359:1620  FIN_WAIT2
+udp        0      0 127.0.0.53:53           0.0.0.0:*
+udp        0      0 0.0.0.0:68              0.0.0.0:*
+udp6       0      0 fe80::20d:3aff:fef9:b761:546 :::*
+```
+
+After enable NSG logging, will get the same flow logging.
+```
+"1572419632,168.63.129.16,10.0.0.5,56372,80,T,I,A,B,,,,",
+"1572419632,fe80::1234:5678:9abc,ace:cab:deca:deed::5,56383,80,T,I,A,B,,,,",
+"1572419634,2404:f801:8050:1:80c0::9359,ace:cab:deca:deed::5,30278,80,T,I,A,E,14,1557,13,24562",
+```
+
