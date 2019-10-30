@@ -13,7 +13,7 @@ The template creates the following Azure resources:
 - two virtual machines with both IPv4 and IPv6 endpoints in the VNET/subnet
 
 There are two json template, [one](https://github.com/yinghli/azurevmipv6/blob/master/ipv6.json) is for Windows Server 2019, the [other](https://github.com/yinghli/azurevmipv6/blob/master/ipv6ubuntu.json) is Ubuntu 18.04. </br>
-Go to Azure portal and deploy by template.</br>
+Go to Azure portal, follow [this](https://docs.microsoft.com/en-us/azure/virtual-network/ipv6-configure-standard-load-balancer-template-json) to deploy it.</br>
 
 ## Windows 
 For Windows Server, the VM can boot automatically. Login the system, ipconfig will show the IPv4/IPv6 configuration. </br>
