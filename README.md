@@ -81,3 +81,12 @@ After enable NSG logging, will get the same flow logging.
 "1572419634,2404:f801:8050:1:80c0::9359,ace:cab:deca:deed::5,30278,80,T,I,A,E,14,1557,13,24562",
 ```
 
+First two log are probe message from standard load balancer(SLB). <.br>
+169.63.129.16 and fe80::1234:5678:9abc are SLB probe packet source IP. <.br>
+"T" means TCP, "I" is inbound direction. "A" is traffic is allowed. "B" is initial packet. <.br>
+
+Third one the customer real IPv6 request.<.br> 
+2404:f801:8050:1:80c0::9359 is source IPv6 address. ace:cab:deca:deed::5 is server IPv6 address. <.br>
+30278 is source port, 80 is destination port. <.br>
+"T" means TCP, "I" is inbound direction. "A" is traffic is allowed. "E" means connection closed. <.br>
+14 packets client sent to server, 1557 bytes. 13 packets server send to client, 2456 bytes.<.br>
